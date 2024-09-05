@@ -29,9 +29,10 @@ func main(){
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	fmt.Fprint(w, string(b))
+	// fmt.Fprint(w, string(b))
+	w.Write(b)
 	}
-
+	
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/about", aboutHandler )
 	http.HandleFunc("/data", dataHandler )
