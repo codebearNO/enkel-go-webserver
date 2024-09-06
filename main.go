@@ -23,19 +23,22 @@ func main(){
 	
 	var arne Person = Person{Name: "Arne", Age: 2}
 
-	dataHandler := func(w http.ResponseWriter, r *http.Request){
-		
-	b, err := json.Marshal(arne)
-	if err != nil {
-		fmt.Println("error:", err)
-	}
-	// fmt.Fprint(w, string(b))
-	w.Write(b)
+	dataHandler := func(w http.ResponseWriter, r *http.Request){	
+		b, err := json.Marshal(arne)
+		if err != nil {
+			fmt.Println("error:", err)
+		}
+		// fmt.Fprint(w, string(b))
+		w.Write(b)
 	}
 	
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/about", aboutHandler )
 	http.HandleFunc("/data", dataHandler )
+
+
+	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("C:/Users/Thor/source/repos/go-webserver/static"))))
+
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
