@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Person struct {
@@ -32,13 +33,24 @@ func main(){
 		w.Write(b)
 	}
 	
+	processHandler := func(w http.ResponseWriter, r *http.Request) {
+		go func() {
+			start := time.Now()
+			var sum int
+			for i:=0;i<1000;i++{
+				time.Sleep(5*time.Millisecond)
+				sum += i
+			}
+			fmt.Printf("Process took %.4f seconds, and resulted in sum: %v", time.Since(start).Seconds(), sum)
+		}()
+	}
+
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/about", aboutHandler )
 	http.HandleFunc("/data", dataHandler )
-
+	http.HandleFunc("/process", processHandler)
 
 	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("C:/Users/Thor/source/repos/go-webserver/static"))))
-
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
