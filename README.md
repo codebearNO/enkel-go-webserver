@@ -15,4 +15,5 @@
 ## Use
 
 Once the server is up and running, you can test the API calls either by visiting localhost:8080 in your browser, or use curl:
+
 `curl http://localhost:8080/*insert route here*`
