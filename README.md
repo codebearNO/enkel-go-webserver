@@ -9,7 +9,7 @@
 1. Install GoLang 1.23 or newer
 2. Download repo
 3. cd into the folder
-4. run command: go run main.go
+4. run command: go run main.go startHTTPServer.go
 5. to shut down: CTRL-C
 
 ## Use
@@ -17,3 +17,11 @@
 Once the server is up and running, you can test the API calls either by visiting localhost:8080 in your browser, or use curl:
 
 `curl http://localhost:8080/*insert route here*`
+
+Routes:
+
+- http://localhost:8080/
+- http://localhost:8080/about
+- http://localhost:8080/data
+- http://localhost:8080/process
+- http://localhost:8080/static
